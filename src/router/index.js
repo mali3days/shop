@@ -25,7 +25,7 @@ export default new Router({
   mode: 'hash', // Demo is living in GitHub.io, so required!
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
