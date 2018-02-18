@@ -1,7 +1,7 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
-const linkProducts = 'http://localhost:4040/api/products';
+const linkProducts = 'https://shop2018.herokuapp.com/api/products';
 
 const getProducts = () =>
   axios.get(`${linkProducts}`)

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const sendOrder = order =>
-    axios.post('http://localhost:4040/api/orders', order)
+    axios.post('https://shop2018.herokuapp.com/api/orders', order)
     .then(response => response.data)
     .catch(error => error);
 
