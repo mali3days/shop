@@ -24,8 +24,6 @@ import '@/assets/js/mimity.detail';
 import '@/assets/js/mimity';
 import '@/assets/js/mimity.filter-sidebar';
 
-import '@/assets/fonts/fontawesome-webfont.woff2';
-
 import App from './App';
 
 import router from './router';
