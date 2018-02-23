@@ -11,4 +11,4 @@ branches:
   - master
   - dev
 
-script: npm run build
+script: npm run build && git push origin master
