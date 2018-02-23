@@ -49,6 +49,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       // This will result in *all* of your app's CSS being loaded upfront.
       allChunks: false,
     }),
+    // new ExtractTextPlugin.extract({
+    //   use: ['css-loader', 'sass-loader'],
+    //   fallback: 'vue-style-loader',
+    //   publicPath: '../../'
+    // }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
