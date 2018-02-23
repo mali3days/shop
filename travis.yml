@@ -1,0 +1,10 @@
+language: node_js
+
+before_script:
+- npm install 
+
+# Tell Travis CI to monitor only these branches
+branches:
+  only:
+  - master
+  - dev
