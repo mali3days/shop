@@ -71,7 +71,8 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-const { mapGetters, mapActions } = createNamespacedHelpers('products/')
+
+const { mapGetters } = createNamespacedHelpers('products/');
 
 export default {
   name: 'MiddleHeader',
@@ -82,7 +83,7 @@ export default {
   }),
   methods: {
     removeProductFromCart(product) {
-      $('.tooltip').tooltip('destroy');
+      // $('.tooltip').tooltip('destroy');
       this.$store.dispatch('products/removeProductFromCart', { id: product._id });
     },
   },
