@@ -1,6 +1,8 @@
-# shop-three-daisies
+# Online shop
 
-> Online shop
+> “The most beautiful clothes that can dress a woman are the arms of the man she loves. But for those who haven’t had the fortune of finding this happiness, I am there.” -Yves Saint Laurent
+
+#DEMO [buBBle shOp](https://mali3days.github.io/shop/#/).
 
 ## Build Setup
 
