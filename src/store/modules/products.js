@@ -4,6 +4,7 @@ import * as types from '../mutation-types';
 // initial state
 const state = {
   all: [],
+  product: null,
   lastAdded: [],
   recommended: [],
   woman: [],
@@ -24,6 +25,7 @@ const getCartProducts = state => state.all.filter(product => product.inCart);
 // getters
 const getters = {
   products: state => state.all,
+  product: state => state.product,
   lastAdded: state => state.lastAdded,
   recommended: state => state.recommended,
   woman: state => state.woman,
@@ -42,12 +44,21 @@ const getters = {
 // actions
 const actions = {
   /* products */
-  async getProducts({ commit }) {
+  async getProducts({ commit }, opts = null) {
     try {
-      const products = await productsApi.getProducts();
+      const products = await productsApi.getProducts(opts);
+
       commit(types.RECEIVE_PRODUCTS_SUCCESS, { products });
     } catch (error) {
       commit(types.RECEIVE_PRODUCTS_FAILURE, { error });
+    }
+  },
+  async getProductByModel({ commit }, opts) {
+    try {
+      const product = await productsApi.getProductByModel(opts);
+      commit(types.RECEIVE_PRODUCT_SUCCESS, { product });
+    } catch (error) {
+      commit(types.RECEIVE_PRODUCT_FAILURE, { error });
     }
   },
   async getLastaddedProducts({ commit }) {
@@ -80,6 +91,7 @@ const actions = {
 
   /* cart */
   addProductToCart({ commit }, { id }) {
+    //eslint-disable-next-line
     console.log(id);
     try {
       commit(types.ADD_PRODUCT_TO_CART, { id });
@@ -125,6 +137,21 @@ const mutations = {
     state.dataFetched = false;
     state.dataFething = false;
   },
+
+  /* One product */
+  [types.RECEIVE_PRODUCT_SUCCESS](state, { product }) {
+    state.product = product;
+    state.error = false;
+    state.dataFetched = true;
+    state.dataFething = false;
+  },
+  [types.RECEIVE_PRODUCT_FAILURE](state, { error }) {
+    state.error = error;
+    state.dataFetched = false;
+    state.dataFething = false;
+  },
+  /*  */
+
   [types.RECEIVE_LAST_ADDED_PRODUCTS_SUCCESS](state, { products }) {
     state.lastAdded = products;
     state.error = false;
@@ -168,6 +195,7 @@ const mutations = {
       current.qty = 1;
       state.all.splice(state.all.indexOf(current), 1, current);
     } else {
+      //eslint-disable-next-line
       console.error('something go wrong');
     }
   },
@@ -177,6 +205,7 @@ const mutations = {
       current.qty = qty;
       state.all.splice(state.all.indexOf(current), 1, current);
     } else {
+      //eslint-disable-next-line
       console.error('something go wrong');
     }
   },
@@ -186,6 +215,7 @@ const mutations = {
       delete (current.inCart);
       state.all.splice(state.all.indexOf(current), 1, current);
     } else {
+      //eslint-disable-next-line
       console.error('something go wrong');
     }
   },

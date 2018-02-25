@@ -122,6 +122,7 @@
 
 
         if (!originalinput.is('input')) {
+          //eslint-disable-next-line
           console.log('Must be an input.');
           return;
         }

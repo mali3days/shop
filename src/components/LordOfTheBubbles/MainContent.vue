@@ -382,15 +382,15 @@ export default {
   //     if (val) {
   //       setTimeout(() => {
   //         if ($('.widget-slider').exist()) {
-  //           var widget_slider = $('.widget-slider');
-  //           // widget_slider.data('owl.carousel').destroy();
-  //           widget_slider.owlCarousel({
+  //           var widgetSlider = $('.widget-slider');
+  //           // widgetSlider.data('owl.carousel').destroy();
+  //           widgetSlider.owlCarousel({
   //             items:1,
   //             dots: false,
   //             nav: true,
-  //             navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-  //             responsive:{
-  //               0:{
+  //             navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+  //             responsive: {
+  //               0: {
   //                 items:2,
   //               },
   //               768:{
@@ -407,9 +407,9 @@ export default {
   //           product_slider.owlCarousel({
   //             dots: false,
   //             nav: true,
-  //             navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-  //             responsive:{
-  //                 0:{
+  //             navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+  //             responsive: {
+  //                 0: {
   //                   items:2,
   //                 },
   //                 768:{
@@ -428,38 +428,38 @@ export default {
   created: () => {
     setTimeout(() => {
     // Price Range
-        var price = document.getElementById('price');
-        noUiSlider.create(price, {
-          start: [20, 80],
-          connect: true,
-          range: {
-            'min': 33,
-            'max': 100
-          }
-        });
-        price.noUiSlider.on('update', function(values, handle) {
-          var value = values[handle];
-          if (handle) {
-            $('#max-price').text('$' + Math.round(value));
-            $('input[name="max-price"]').text(Math.round(value));
-          } else {
-            $('#min-price').text('$' + Math.round(value));
-            $('input[name="min-price"]').text(Math.round(value));
-          }
-        });
-    }, 2000)
+      const price = document.getElementById('price');
+      noUiSlider.create(price, {
+        start: [20, 80],
+        connect: true,
+        range: {
+          min: 33,
+          max: 100,
+        },
+      });
+      price.noUiSlider.on('update', (values, handle) => {
+        const value = values[handle];
+        if (handle) {
+          $('#max-price').text(`$${Math.round(value)}`);
+          $('input[name="max-price"]').text(Math.round(value));
+        } else {
+          $('#min-price').text(`$${Math.round(value)}`);
+          $('input[name="min-price"]').text(Math.round(value));
+        }
+      });
+    }, 2000);
     // setTimeout(() => {
     //   if ($('.widget-slider').exist()) {
-    //     var widget_slider = $('.widget-slider');
-    //     // widget_slider.data('owl.carousel').destroy();
-    //     widget_slider.owlCarousel({
+    //     var widgetSlider = $('.widget-slider');
+    //     // widgetSlider.data('owl.carousel').destroy();
+    //     widgetSlider.owlCarousel({
     //       items:1,
     //       dots: false,
     //       lazyLoad: true,
     //       nav: true,
-    //       navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    //       responsive:{
-    //         0:{
+    //       navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    //       responsive: {
+    //         0: {
     //           items:2,
     //         },
     //         768:{

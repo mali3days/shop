@@ -29,14 +29,14 @@ export default {
     show: {
       type: Boolean,
       required: true,
-      twoWay: true  
-    }
+      twoWay: true,
+    },
   },
   methods: {
-    hideModal: function() {
-      this.$emit('closeModal')
+    hideModal() {
+      this.$emit('closeModal');
     },
-  }
+  },
 };
 </script>
 

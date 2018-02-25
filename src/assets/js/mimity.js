@@ -114,20 +114,20 @@ function get_current_scroll() {
         autoplayHoverPause:true,
         dots:false,
         nav:true,
-        navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
       });
     }
 
     // owlCarousel for Widget Slider ===========================================================
     // if ($('.widget-slider').exist()) {
-    //   var widget_slider = $('.widget-slider');
-    //   widget_slider.owlCarousel({
+    //   var widgetSlider = $('.widget-slider');
+    //   widgetSlider.owlCarousel({
     //     items:1,
     //     dots: false,
     //     nav: true,
-    //     navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    //     responsive:{
-    //       0:{
+    //     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    //     responsive: {
+    //       0: {
     //         items:2,
     //       },
     //       768:{
@@ -146,9 +146,9 @@ function get_current_scroll() {
     //   product_slider.owlCarousel({
     //     dots: false,
     //     nav: true,
-    //     navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    //     responsive:{
-    //         0:{
+    //     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    //     responsive: {
+    //         0: {
     //           items:2,
     //         },
     //         768:{
@@ -163,13 +163,13 @@ function get_current_scroll() {
 
      // owlCarousel for Related Product Slider =================================================
     // if ($('.related-product-slider').exist()) {
-    //   var related_product_slider = $('.related-product-slider')
-    //   related_product_slider.owlCarousel({
+    //   const relatedProductSlider = $('.related-product-slider');
+    //   relatedProductSlider.owlCarousel({
     //     dots: false,
     //     nav: true,
-    //     navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    //     responsive:{
-    //         0:{
+    //     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    //     responsive: {
+    //         0: {
     //           items:2,
     //         },
     //         768:{
@@ -191,9 +191,9 @@ function get_current_scroll() {
     //   brand_slider.owlCarousel({
     //     dots:false,
     //     nav:true,
-    //     navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    //     responsive:{
-    //       0:{
+    //     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    //     responsive: {
+    //       0: {
     //         items:2,
     //         margin:10
     //       },
@@ -217,20 +217,20 @@ function get_current_scroll() {
     //   });
     // }
 
-    // // Tooltip =================================================================================
+    // // Tooltip ========================================
     // $('button[data-toggle="tooltip"]').tooltip({container:'body',animation:false});
     // $('a[data-toggle="tooltip"]').tooltip({container:'body',animation:false});
 
-    // // Back top Top ============================================================================
+    // // Back top Top ======================================
     //   $(window).scroll(function(){
-    //   if ($(this).scrollTop()>70) {
+    //   if ($(this).scrollTop() > 70) {
     //     $('.back-top').fadeIn();
     //   } else {
     //     $('.back-top').fadeOut();
     //   }
     // });
 
-    // Touchspin ===============================================================================
+    // Touchspin ============================================
     // if ($('.input-qty').exist()) {
     //   $('.input-qty input').TouchSpin({
     //     verticalbuttons: true,
@@ -238,7 +238,7 @@ function get_current_scroll() {
     //   });
     // }
 
-    // Typeahead example =======================================================================
+    // Typeahead example ================================================
     $('.search-input').typeahead({
       fitToElement: true,
       source: [

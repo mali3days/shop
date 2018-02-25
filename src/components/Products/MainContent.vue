@@ -141,7 +141,7 @@
          <!-- <div class="box-product-outer" v-for="product in products" :key="product._id">
             <div class="box-product">
               <div class="img-wrapper">
-                <router-link :to="{ path: `/${product.model}`, params: { productId: 123 }}">
+                <router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">
                    <img alt="Product" :src="product.images[0]">
                 </router-link>
                 <div class="tags">
@@ -154,7 +154,7 @@
                   <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
                 </div>
               </div>
-              <h6><router-link :to="{ path: `/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
+              <h6><router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
               <div class="price">
                 <div>{{product.price}}грн. <span class="label-tags"><span class="label label-danger arrowed">-10%</span></span></div>
                 <span class="price-old">$15.00</span>
@@ -176,7 +176,7 @@
         <div @mouseover="active = product._id" @mouseleave="active = null" class="col-xs-6 col-md-4 col-lg-3 box-product-outer" v-for="product in products" :key="product._id">
           <div class="box-product">
             <div class="img-wrapper">
-              <router-link  :to="{ path: `/${product.model}`, params: { productId: 123 }}">
+              <router-link  :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">
                  <img v-show="active === product._id" alt="Product" :src="product.images.find(l => l.includes('back')) ? product.images.find(l => l.includes('back')) : product.images[2] ? product.images[2] : product.images[1]">
                  <img v-show="active !== product._id" alt="Product" :src="product.images[0]">
               </router-link>
@@ -195,7 +195,7 @@
                 <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
               </div>
             </div>
-            <h6 style="height: 35px;"><router-link :to="{ path: `/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
+            <h6 style="height: 35px;"><router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
             <div class="price">
               <div>{{product.price.discount > 0 ? product.price.total : product.price.current}} грн. <span v-if="product.price.discount > 0" class="label-tags"><span class="label label-danger arrowed">-{{product.price.discount}}%</span></span></div>
               <span v-if="product.price.discount > 0" class="price-old">{{product.price.current}} грн.</span>
@@ -398,49 +398,49 @@ export default {
         sortBy: [
           {
             title: 'Популярности',
-            value: '{"title":"purchased","order":"desc"}'
+            value: '{"title":"purchased","order":"desc"}',
           },
           {
             title: 'Дешево &raquo; Дорого',
-            value: '{"title":"price.total","order":"asc"}'
+            value: '{"title":"price.total","order":"asc"}',
           },
           {
             title: 'Дорого &raquo; Дешево',
-            value: '{"title":"price.total","order":"desc"}'
-          }
+            value: '{"title":"price.total","order":"desc"}',
+          },
         ],
       },
       filterBar: {
         category: {
           list: [
-          "Брюки",
-          "Верхняя одежда",
-          "Кофты, худи",
-          "Платья",
-          "Рубашки, блузки",
-          "Свитера, туники",
-          "Свитшоты",
-          "Костюмы",
-          "Спортивные костюмы",
-          "Футболки, майки",
-          "Шорты",
-          "Юбки",
+            'Брюки',
+            'Верхняя одежда',
+            'Кофты, худи',
+            'Платья',
+            'Рубашки, блузки',
+            'Свитера, туники',
+            'Свитшоты',
+            'Костюмы',
+            'Спортивные костюмы',
+            'Футболки, майки',
+            'Шорты',
+            'Юбки',
           ],
           checked: [],
         },
         size: {
           list: [
-            "XXS (40)",  "XS (42)",
-            "XS-S (42-44)", "S (44)",
-            "M (46)", "M-L (46-48)",
-             "L (48)", "XL (50)"
+            'XXS (40)', 'XS (42)',
+            'XS-S (42-44)', 'S (44)',
+            'M (46)', 'M-L (46-48)',
+            'L (48)', 'XL (50)',
           ],
           checked: [],
-        }
+        },
       },
       pages: {
         total: 3,
-        UI: [1, 2, 3]
+        UI: [1, 2, 3],
       },
       active: false,
       sortSelected: '{"title":"purchased","order":"desc"}',
@@ -453,9 +453,11 @@ export default {
       this.applyFilterButtonDisabled = false;
     },
     removeFilterOption(option, item) {
-      this.filterBar[option].checked = this.filterBar[option].checked.filter((i) => i !== item);
+      this.filterBar[option].checked = this.filterBar[option].checked.filter(i => i !== item);
 
-      if (this.filterBar['size'].checked.length === 0 && this.filterBar['category'].checked.length === 0) {
+      //eslint-disable-next-line
+      if (this.filterBar.size.checked.length === 0 && this.filterBar.category.checked.length === 0) {
+        //eslint-disable-next-line
         console.log('NO FILTERS!');
         this.applyFilters();
       }
@@ -463,7 +465,9 @@ export default {
     },
     applyFilters() {
       const value1 = JSON.parse(this.sortSelected);
+      //eslint-disable-next-line
       console.log(this.filterBar.category.checked);
+      //eslint-disable-next-line
       console.log(this.filterBar.size.checked);
       const { category, size } = this.filterBar;
 
@@ -471,7 +475,7 @@ export default {
         sort: value1.title,
         order: value1.order,
         cat: category.checked,
-        size: size.checked
+        size: size.checked,
       });
       this.applyFilterButtonDisabled = true;
     },
@@ -489,7 +493,7 @@ export default {
         sort,
         order,
         limit,
-        offset
+        offset,
       };
 
       if (cat) dispatchObject.cat = cat;
@@ -498,31 +502,33 @@ export default {
       this.$store.dispatch(dispatchObject);
     },
     setPagesForUI() {
-      const { currentpage, lastpage }  = this.pagination;
+      const { currentpage, lastpage } = this.pagination;
       let UIpdages = [1];
       if (currentpage === 1) {
-        UIpdages = [currentpage, currentpage+1 , currentpage+2];
+        UIpdages = [currentpage, currentpage + 1, currentpage + 2];
       } else if (this.pagination.currentpage === lastpage) {
-        UIpdages = [lastpage-2, lastpage-1, lastpage];
+        UIpdages = [lastpage - 2, lastpage - 1, lastpage];
       } else {
-        UIpdages = [currentpage-1, currentpage, currentpage+1];
+        UIpdages = [currentpage - 1, currentpage, currentpage + 1];
       }
-      if (lastpage === 0) UIpdages = [1]
+      if (lastpage === 0) UIpdages = [1];
       this.pages.UI = UIpdages;
     },
     onPageClick(page) {
       const { currentpage, lastpage, limit } = this.pagination;
-      if (page === currentpage || page > lastpage || page < 1 ) return null;
+      if (page === currentpage || page > lastpage || page < 1) return null;
       const value = JSON.parse(this.sortSelected);
       this.loadProducts({ offset: (page - 1) * limit, sort: value.title, order: value.order });
-    }
+      return null;
+    },
   },
   watch: {
     pagination(val) {
       if (!val) return;
+      //eslint-disable-next-line
       console.log(this.pages);
-      this.pagination.currentpage = val.offset/val.limit + 1;
-      this.pagination.lastpage = Math.round(val.total/val.limit);
+      this.pagination.currentpage = (val.offset / val.limit) + 1;
+      this.pagination.lastpage = Math.round(val.total / val.limit);
       this.setPagesForUI();
     },
   },
@@ -531,15 +537,15 @@ export default {
   //     if (val) {
   //       setTimeout(() => {
   //         if ($('.widget-slider').exist()) {
-  //           var widget_slider = $('.widget-slider');
-  //           // widget_slider.data('owl.carousel').destroy();
-  //           widget_slider.owlCarousel({
+  //           var widgetSlider = $('.widget-slider');
+  //           // widgetSlider.data('owl.carousel').destroy();
+  //           widgetSlider.owlCarousel({
   //             items:1,
   //             dots: false,
   //             nav: true,
-  //             navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-  //             responsive:{
-  //               0:{
+  //             navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+  //             responsive: {
+  //               0: {
   //                 items:2,
   //               },
   //               768:{
@@ -556,9 +562,9 @@ export default {
   //           product_slider.owlCarousel({
   //             dots: false,
   //             nav: true,
-  //             navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-  //             responsive:{
-  //                 0:{
+  //             navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+  //             responsive: {
+  //                 0: {
   //                   items:2,
   //                 },
   //                 768:{
@@ -575,8 +581,6 @@ export default {
   //   },
   // },
   mounted() {
-    const self = this;
-
     this.loadProducts({
       limit: this.sortBar.perPage[0],
       offset: 0,
@@ -613,16 +617,16 @@ export default {
 
     // setTimeout(() => {
     //   if ($('.widget-slider').exist()) {
-    //     var widget_slider = $('.widget-slider');
-    //     // widget_slider.data('owl.carousel').destroy();
-    //     widget_slider.owlCarousel({
+    //     var widgetSlider = $('.widget-slider');
+    //     // widgetSlider.data('owl.carousel').destroy();
+    //     widgetSlider.owlCarousel({
     //       items:1,
     //       dots: false,
     //       lazyLoad: true,
     //       nav: true,
-    //       navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    //       responsive:{
-    //         0:{
+    //       navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    //       responsive: {
+    //         0: {
     //           items:2,
     //         },
     //         768:{

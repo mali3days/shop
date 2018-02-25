@@ -10,7 +10,7 @@ import Products from '@/components/Products/Products';
 export default {
   name: 'Bagpack',
   components: {
-    Products
+    Products,
   },
   data() {
     return {

@@ -19,6 +19,7 @@ const getters = {
 const actions = {
   /* orders */
   async sendOrder({ commit }, { order }) {
+    //eslint-disable-next-line
     console.log(order);
     commit(types.SEND_ORDER_REQUEST);
 

@@ -48,9 +48,9 @@ export default {
       return this.$route.matched;
     },
   },
-  // mounted() { 
+  // mounted() {
   //   document.body.classList.add('admin-page');
-  // }, 
+  // },
   // beforeRouteLeave(to, from, next) {
   //   document.body.classList.remove('admin-page');
   //   next();

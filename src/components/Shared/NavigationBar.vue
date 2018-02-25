@@ -98,9 +98,9 @@ export default {
   name: 'NavigationBar',
   data() {
     return {
-      pathname: window.location.pathname
-    }
-  }
+      pathname: window.location.pathname,
+    };
+  },
 };
 </script>
 

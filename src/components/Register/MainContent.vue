@@ -88,41 +88,40 @@ export default {
   created: () => {
     setTimeout(() => {
       if ($('.widget-slider').exist()) {
-        var widget_slider = $('.widget-slider');
-        // widget_slider.data('owl.carousel').destroy();
-        widget_slider.owlCarousel({
-          items:1,
+        const widgetSlider = $('.widget-slider');
+        // widgetSlider.data('owl.carousel').destroy();
+        widgetSlider.owlCarousel({
+          items: 1,
           dots: false,
           nav: true,
-          navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-          responsive:{
-            0:{
-              items:2,
+          navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+          responsive: {
+            0: {
+              items: 2,
             },
-            768:{
-              items:3,
+            768: {
+              items: 3,
             },
-            992:{
-              items:1,
-            }
-          }
+            992: {
+              items: 1,
+            },
+          },
         });
       }
 
-            // Tooltip =================================================================================
-      $('button[data-toggle="tooltip"]').tooltip({container:'body',animation:false});
-      $('a[data-toggle="tooltip"]').tooltip({container:'body',animation:false});
+            // Tooltip ===================================================
+      $('button[data-toggle="tooltip"]').tooltip({ container: 'body', animation: false });
+      $('a[data-toggle="tooltip"]').tooltip({ container: 'body', animation: false });
 
-            // // Back top Top ============================================================================
-        $(window).scroll(function(){
-        if ($(this).scrollTop()>70) {
+            // // Back top Top ===================================
+      $(window).scroll(function cb() {
+        if ($(this).scrollTop() > 70) {
           $('.back-top').fadeIn();
         } else {
           $('.back-top').fadeOut();
         }
       });
-
-    })
+    });
   },
 };
 </script>

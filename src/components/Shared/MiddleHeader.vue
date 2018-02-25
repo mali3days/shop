@@ -84,11 +84,12 @@ export default {
   methods: {
     removeProductFromCart(product) {
       // $('.tooltip').tooltip('destroy');
+      // eslint-disable-next-line
       this.$store.dispatch('products/removeProductFromCart', { id: product._id });
     },
   },
   created() {
-    setTimeout(() => { console.log(this.cart); }, 3000);
+    // setTimeout(() => { console.log(this.cart); }, 3000);
   },
 };
 </script>

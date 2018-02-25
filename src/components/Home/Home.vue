@@ -10,7 +10,7 @@
       :recommended="recommended"
       :woman="woman"
     />
-    <Footer/>
+    <FooterComponent/>
     <BackToTop/>
     <!-- <ColorChooser/> -->
   </div>
@@ -18,16 +18,16 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-const { mapGetters, mapActions } = createNamespacedHelpers('products/');
-
 import TopHeader from '@/components/Shared/TopHeader';
 import MiddleHeader from '@/components/Shared/MiddleHeader';
 import NavigationBar from '@/components/Shared/NavigationBar';
 import FullSlider from '@/components/Home/FullSlider';
 import MainContent from '@/components/Home/MainContent';
-import Footer from '@/components/Shared/Footer';
+import FooterComponent from '@/components/Shared/FooterComponent';
 import BackToTop from '@/components/Shared/BackToTop';
 // import ColorChooser from '@/components/Shared/ColorChooser';
+
+const { mapGetters } = createNamespacedHelpers('products/'); // mapActions
 
 export default {
   name: 'Home',
@@ -37,7 +37,7 @@ export default {
     NavigationBar,
     FullSlider,
     MainContent,
-    Footer,
+    FooterComponent,
     BackToTop,
     // ColorChooser,
   },

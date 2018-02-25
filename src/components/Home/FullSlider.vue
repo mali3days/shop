@@ -11,18 +11,19 @@
 </template>
 
 <script>
-import slide1 from '../../assets/images/demo/bubble1.jpg'
-import slide2 from '../../assets/images/demo/bubble2.jpg'
-import slide3 from '../../assets/images/demo/bubble3.jpg'
+import slide1 from '../../assets/images/demo/bubble1.jpg';
+import slide2 from '../../assets/images/demo/bubble2.jpg';
+import slide3 from '../../assets/images/demo/bubble3.jpg';
+
 export default {
   name: 'FullSlider',
   data() {
-  return {
-    slide1,
-    slide2,
-    slide3,
-  };
-},
+    return {
+      slide1,
+      slide2,
+      slide3,
+    };
+  },
 };
 </script>
 

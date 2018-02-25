@@ -12,14 +12,14 @@
       :dataFetched="dataFetched"
       :meta="meta"
     />
-    <Footer/>
-    <BackToTop/>
+    <FooterComponent />
+    <BackToTop />
     <!-- <ColorChooser/> -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+// import { mapGetters } from 'vuex';
 
 import TopHeader from '@/components/Shared/TopHeader';
 import MiddleHeader from '@/components/Shared/MiddleHeader';
@@ -28,7 +28,7 @@ import NavigationBar from '@/components/Shared/NavigationBar';
 import BreadCrumbs from '@/components/Shared/BreadCrumbs';
 import MainContent from '@/components/Products/MainContent';
 
-import Footer from '@/components/Shared/Footer';
+import FooterComponent from '@/components/Shared/FooterComponent';
 import BackToTop from '@/components/Shared/BackToTop';
 // import ColorChooser from '@/components/Shared/ColorChooser';
 
@@ -47,12 +47,12 @@ export default {
     },
     pagination: {
       type: Object,
-      required: false
+      required: false,
     },
     meta: {
       type: Object,
-      required: false
-    }
+      required: false,
+    },
   },
   components: {
     TopHeader,
@@ -61,7 +61,7 @@ export default {
     BreadCrumbs,
     // FullSlider,
     MainContent,
-    Footer,
+    FooterComponent,
     BackToTop,
     // ColorChooser,
   },

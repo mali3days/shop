@@ -11,9 +11,9 @@
       nav:item_count < 5 ? false : true,
       mouseDrag:item_count < 5 ? false : true,
       touchDrag:item_count < 5 ? false : true,
-      navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-      responsive:{
-          0:{ items:4, }
+      navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+      responsive: {
+          0: { items:4, }
       }
     });
     $('.products-slider-detail a').click(function(){

@@ -7,7 +7,7 @@
     <BreadCrumbs gender="Корзина" />
 
     <MainContent :cart="cart" :cartPrice="cartPrice" />
-    <Footer/>
+    <FooterComponent/>
     <BackToTop/>
     <!-- <ColorChooser/> -->
   </div>
@@ -15,8 +15,6 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-const { mapGetters, mapActions } = createNamespacedHelpers('products/');
-
 import TopHeader from '@/components/Shared/TopHeader';
 import MiddleHeader from '@/components/Shared/MiddleHeader';
 import NavigationBar from '@/components/Shared/NavigationBar';
@@ -24,9 +22,11 @@ import NavigationBar from '@/components/Shared/NavigationBar';
 import BreadCrumbs from '@/components/Shared/BreadCrumbs';
 import MainContent from '@/components/Cart/MainContent';
 
-import Footer from '@/components/Shared/Footer';
+import FooterComponent from '@/components/Shared/FooterComponent';
 import BackToTop from '@/components/Shared/BackToTop';
 // import ColorChooser from '@/components/Shared/ColorChooser';
+
+const { mapGetters } = createNamespacedHelpers('products/'); // mapActions
 
 export default {
   name: 'Cart',
@@ -37,7 +37,7 @@ export default {
     BreadCrumbs,
     // FullSlider,
     MainContent,
-    Footer,
+    FooterComponent,
     BackToTop,
     // ColorChooser,
   },
@@ -51,7 +51,7 @@ export default {
     // dataFetched: 'dataFetched',
     // error: 'error',
     cart: 'cart',
-    cartPrice: 'cartPrice'
+    cartPrice: 'cartPrice',
   }),
   created() {
     // this.$store.dispatch('products/getProducts');

@@ -3,10 +3,19 @@ import queryString from 'query-string';
 
 const linkProducts = `${process.env.ENDPOINT}/api/products`;
 
-const getProducts = () =>
-  axios.get(`${linkProducts}`)
+// filterField, filterValue
+const getProducts = (opts) => {
+  let query = '';
+
+  if (opts) {
+    const parsedQuery = Object.keys(opts).map(key => `${key}=${opts[key]}`).join('&');
+    query += '?'.concat(parsedQuery);
+  }
+
+  return axios.get(`${linkProducts}${query}`)
     .then(response => response.data)
     .catch(error => error);
+};
 
 const getLastaddedProducts = limit =>
   axios.get(`${linkProducts}?limit=${limit}&lastadded=true`)
@@ -36,10 +45,17 @@ const getWomanProducts = (opts) => {
     .catch(error => error);
 };
 
+const getProductByModel = (opts) => {
+  const { model } = opts;
+  return axios.get(`${linkProducts}?ids[0]=${model}`)
+  .then(response => response.data[0])
+  .catch(error => error);
+};
 
 export default {
   getProducts,
   getLastaddedProducts,
   getRecommendedProducts,
   getWomanProducts,
+  getProductByModel,
 };

@@ -5,13 +5,20 @@
     <NavigationBar/>
 
     <BreadCrumbs
-      :gender="products[0].gender"
-      :model="products[0].model"
-      :type="products[0].type"
+      v-if="product"
+      :model="product.model"
+      :type="product.type"
+    />
+      <!-- :gender="products[0].gender" -->
+
+    <MainContent
+      v-if="product && similarProducts"
+      :product="product"
+      :similarProducts="similarProducts"
+      :dataFetched="dataFetched"
     />
 
-    <MainContent :product="products[0]" :related="products" :dataFetched="dataFetched" />
-    <Footer/>
+    <FooterComponent />
     <BackToTop/>
     <!-- <ColorChooser/> -->
   </div>
@@ -19,8 +26,6 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-const { mapGetters, mapActions } = createNamespacedHelpers('products/');
-
 import TopHeader from '@/components/Shared/TopHeader';
 import MiddleHeader from '@/components/Shared/MiddleHeader';
 import NavigationBar from '@/components/Shared/NavigationBar';
@@ -28,9 +33,11 @@ import NavigationBar from '@/components/Shared/NavigationBar';
 import BreadCrumbs from '@/components/Shared/BreadCrumbs';
 import MainContent from '@/components/Product/MainContent';
 
-import Footer from '@/components/Shared/Footer';
+import FooterComponent from '@/components/Shared/FooterComponent';
 import BackToTop from '@/components/Shared/BackToTop';
 // import ColorChooser from '@/components/Shared/ColorChooser';
+
+const { mapGetters } = createNamespacedHelpers('products/');  // mapActions
 
 export default {
   name: 'Product',
@@ -41,7 +48,7 @@ export default {
     BreadCrumbs,
     // FullSlider,
     MainContent,
-    Footer,
+    FooterComponent,
     BackToTop,
     // ColorChooser,
   },
@@ -51,13 +58,38 @@ export default {
     };
   },
   computed: mapGetters({
-    products: 'products',
+    product: 'product',
+    similarProducts: 'products',
     dataFetched: 'dataFetched',
     error: 'error',
   }),
   created() {
-    console.log('GET PRODUCT BY ID');
-    this.$store.dispatch('products/getProducts');
+    this.loadProductByModel(this.$route.params.model);
+  },
+  watch: {
+    '$route.params.model': function cb(model) {
+      this.loadProductByModel(model);
+    },
+    product(product) {
+      if (!product) return;
+
+      this.$store.dispatch(
+        'products/getProducts',
+        {
+          filterField: 'categories',
+          filterValue: product.categories,
+          limit: '10',
+        },
+      );
+    },
+  },
+  methods: {
+    loadProductByModel(model) {
+      this.$store.dispatch(
+        'products/getProductByModel',
+        { model },
+      );
+    },
   },
 };
 </script>

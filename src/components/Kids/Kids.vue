@@ -4,14 +4,15 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-const { mapGetters, mapActions } = createNamespacedHelpers('products/');
-
 import Products from '@/components/Products/Products';
+
+const { mapGetters } = createNamespacedHelpers('products/'); // mapActions
+
 
 export default {
   name: 'Kids',
   components: {
-    Products
+    Products,
   },
   data() {
     return {
