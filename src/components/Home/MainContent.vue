@@ -3,9 +3,10 @@
     <div class="row">
       <!-- New Arrivals & Best Selling -->
       <div class="col-md-3 m-b-1">
-        <div class="title"><span><a href="products.html">Новинки <i class="fa fa-chevron-circle-right"></i></a></span></div>
+        <div class="title"><span><a href="products.html">
+          Новинки <i class="fa fa-chevron-circle-right"></i></a></span>
+        </div>
         <div class="widget-slider owl-carousel owl-theme owl-controls-top-offset m-b-2">
-
           <div v-for="product in lastAdded" :key="product._id">
             <div class="box-product-outer">
               <div class="box-product">

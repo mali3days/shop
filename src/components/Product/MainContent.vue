@@ -84,7 +84,7 @@
       <div class="row m-t-3">
         <div class="col-xs-12">
           <div class="title"><span>Похожие товары</span></div>
-          <div v-if="similarProducts" class="related-product-slider owl-carousel owl-theme owl-controls-top-offset">
+          <div class="related-product-slider owl-carousel owl-theme owl-controls-top-offset">
             <div class="box-product-outer" v-for="relate in similarProducts" :key="relate._id">
               <div class="box-product">
                 <div class="img-wrapper">
@@ -133,7 +133,12 @@
 
 export default {
   name: 'MainContent',
-  props: ['product', 'similarProducts', 'related', 'dataFetched'],
+  props: [
+    'product',
+    'related',
+    'dataFetched',
+    'similarProducts',
+  ],
   data() {
     return {
     };
@@ -160,39 +165,87 @@ export default {
       }
     });
   },
-  watch: {
-    // product: (newProduct) => {
-      // console.log(newProduct);
-      // $('.bootstrap-select').html(newProduct.size).selectpicker('refresh');
-    // },
-    similarProducts(products) {
-      if (!products) return;
+  updated() {
+       /* 1 */
+      // owlcarosel (if items less than 4, hide nav, disable drag, hide touch)
+      var products_slider_detail = $('.products-slider-detail');
+      var item_count = $('.products-slider-detail a').length;
+      products_slider_detail.owlCarousel({
+        margin:5,
+        dots:false,
+        nav:item_count < 5 ? false : true,
+        mouseDrag:item_count < 5 ? false : true,
+        touchDrag:item_count < 5 ? false : true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        responsive: {
+            0: { items:4, }
+        }
+      });
+      $('.products-slider-detail a').click(function(){
+        var src = $(this).find('img').attr('src');
+        var zoom = $(this).find('img').attr('data-zoom-image');
+        var detail = $(this).parent().parent().parent().parent().parent().find('.image-detail img');
+        detail.attr('src',src);
+        detail.attr('data-zoom-image',zoom);
+        $('.zoomWindow').css('background-image', 'url("' + zoom + '")');
+        return false;
+      });
 
-      if ($('.related-product-slider').exist()) {
-        const relatedProductSlider = $('.related-product-slider');
-        relatedProductSlider.owlCarousel({
-          dots: false,
-          nav: true,
-          navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-          responsive: {
-            0: {
-              items: 2,
+      if (ResponsiveBootstrapToolkit.is('>xs')) {
+        $('.image-detail img').ezPlus({
+          responsive : true,
+          respond: [
+            {
+              range: '1200-10000',
+              zoomWindowHeight: 490,
+              zoomWindowWidth: 782
             },
-            768: {
-              items: 3,
+            {
+              range: '992-1200',
+              zoomWindowHeight: 400,
+              zoomWindowWidth: 649
             },
-            992: {
-              items: 5,
+            {
+              range: '768-992',
+              zoomWindowHeight: 300,
+              zoomWindowWidth: 502
             },
-            1200: {
-              items: 6,
-            },
-          },
+            {
+              range: '100-768',
+              zoomWindowHeight: 0,
+              zoomWindowWidth: 0
+            }
+          ]
         });
       }
-    },
 
-  },
+
+    /* 2 */
+    console.log('XX');
+    console.log($('.related-product-slider').exist());
+    if ($('.related-product-slider').exist()) {
+      const relatedProductSlider = $('.related-product-slider');
+      relatedProductSlider.owlCarousel({
+        dots: false,
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        responsive: {
+          0: {
+            items: 2,
+          },
+          768: {
+            items: 3,
+          },
+          992: {
+            items: 5,
+          },
+          1200: {
+            items: 6,
+          },
+        },
+      });
+    }
+  }
 };
 </script>
 
