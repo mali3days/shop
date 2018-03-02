@@ -9,6 +9,7 @@
       :lastAdded="lastAdded"
       :recommended="recommended"
       :woman="woman"
+      :cart="cart"
     />
     <FooterComponent/>
     <BackToTop/>
@@ -50,6 +51,7 @@ export default {
     lastAdded: 'lastAdded',
     recommended: 'recommended',
     woman: 'woman',
+    cart: 'cart',
     dataFetched: 'dataFetched',
     error: 'error',
   }),

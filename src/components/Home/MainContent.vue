@@ -24,7 +24,9 @@
                     <span v-if="product.labels.includes('Товар недели')" class="label-tags"><span class="label label-default arrowed">Товар недели</span></span>
                   </div>
                   <div class="option">
-                    <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'"><i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i></a>
+                    <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'">
+                      <i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i>
+                    </a>
                     <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a>
                     <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
                   </div>

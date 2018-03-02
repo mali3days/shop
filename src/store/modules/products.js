@@ -3,8 +3,11 @@ import * as types from '../mutation-types';
 
 // initial state
 const state = {
-  all: [],
   product: null,
+
+  cart: [],
+
+  all: [],
   lastAdded: [],
   recommended: [],
   woman: [],
@@ -20,12 +23,15 @@ const state = {
   },
 };
 
-const getCartProducts = state => state.all.filter(product => product.inCart);
+const getCartProducts = state => state.cart;
+
+const allData = ['all', 'lastAdded', 'recommended', 'woman'];
 
 // getters
 const getters = {
-  products: state => state.all,
   product: state => state.product,
+
+  products: state => state.all,
   lastAdded: state => state.lastAdded,
   recommended: state => state.recommended,
   woman: state => state.woman,
@@ -38,7 +44,18 @@ const getters = {
     .reduce((summ, product) => summ + (product.price.total * (product.qty || 1)), 0),
   dataFetched: state => state.dataFetched,
   // eslint-disable-next-line
-  getProductById: (state, id) => [...state.all, state.lastAdded, ...state.woman, ...state.recommended].find(product => product._id === id),
+  getProductById: (state, id) => [
+    ...state.lastAdded,
+    ...state.all,
+    ...state.woman,
+    ...state.recommended,
+  ].find((product) => {
+    if (product._id === id) {
+      console.log('FINDED');
+      return product;
+    }
+    return null;
+  }),
 };
 
 // actions
@@ -190,10 +207,15 @@ const mutations = {
   /* cart */
   [types.ADD_PRODUCT_TO_CART](state, { id }) {
     const current = getters.getProductById(state, id);
+
     if (current) {
-      current.inCart = true;
       current.qty = 1;
-      state.all.splice(state.all.indexOf(current), 1, current);
+      current.inCart = true;
+      const cart = [current, ...state.cart];
+
+      toggleCartItems(current);
+
+      state.cart = [...new Set(cart)];
     } else {
       //eslint-disable-next-line
       console.error('something go wrong');
@@ -212,30 +234,41 @@ const mutations = {
   [types.REMOVE_PRODUCT_FROM_CART](state, { id }) {
     const current = getters.getProductById(state, id);
     if (current) {
+      const cartWithoutCurrent = state.cart.filter(p => p._id !== current._id);
+
+      delete (current.qty);
       delete (current.inCart);
-      state.all.splice(state.all.indexOf(current), 1, current);
+
+      toggleCartItems(current);
+
+      state.cart = [...new Set(cartWithoutCurrent)];
     } else {
       //eslint-disable-next-line
       console.error('something go wrong');
     }
   },
   [types.CLEAR_CART](state) {
-    // const cart = getters.cart(state);
-    // cart.forEach((elem) => {
-    //   delete (elem.inCart);
-    // });
-    state.all = state.all.map((elem) => {
-      if (elem.inCart) {
-        delete (elem.inCart);
-        delete (elem.qty);
-      }
-      return elem;
-    });
+    state.cart = [];
   },
   [types.CART_FAILURE](state, { error }) {
     state.error = error;
   },
 };
+
+function toggleCartItems(current) {
+  allData.forEach((string) => {
+    if (state[string].length === 0) return;
+    const elem = state[string].find((c) => {
+      if (c && current) {
+        c._id === current._id;
+        return current;
+      }
+      return null;
+    });
+    const newRecom = [...state[string], elem];
+    state[string] = [...new Set(newRecom)];
+  });
+}
 
 export default {
   state,
