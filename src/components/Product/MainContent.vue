@@ -41,34 +41,40 @@
                   </div>
                 </td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>Количество</td>
                 <td>
                   <div class="input-qty">
                     <input type="text" value="1" class="form-control text-center"/>
                   </div>
                 </td>
-              </tr>
+              </tr> -->
               <tr>
-                <td>Размер</td>
+                <td>Размеры</td>
                 <td>
-                  <select class="selectpicker" data-width="80px">
+                  <!-- <select class="selectpicker" data-width="80px">
                     <option v-for="s in product.size" :key="s" :value="s">{{s}}</option>
-                  </select>
+                  </select> -->
+                  <span v-for="(s, index) in product.size.slice().reverse()" :key="s">
+                    {{s}} <span v-if="index < product.size.length - 1">|</span>
+                  </span>
                 </td>
               </tr>
               <tr>
                 <td>Материал</td>
                 <td>
-                  <select class="selectpicker" data-width="80px">
+                  <!-- <select class="selectpicker" data-width="80px">
                     <option v-for="t in product.textile" :key="t" :value="t">{{t}}</option>
-                  </select>
+                  </select> -->
+                  <span v-for="(t, index) in product.textile" :key="t">
+                    {{t}} <span v-if="index < product.textile.length - 1">,</span>
+                  </span>
                 </td>
               </tr>
               <tr>
                 <td></td>
                 <td>
-                  <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-heart"></i> Добавить в Список Желаний</button>
+                  <!-- <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-heart"></i> Добавить в Список Желаний</button> -->
                   <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-shopping-cart"></i> Добавить в Корзину</button>
                   <!-- <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-align-left"></i> Добавить к Сравнению</button> -->
                 </td>
@@ -78,7 +84,7 @@
         </div>
       </div>
 
-      <div>{{product.description}}</div>
+      <div class="product-description">{{product.description}}</div>
 
       <!-- Related Products -->
       <div class="row m-t-3">
@@ -249,5 +255,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+  .product-description{
+    text-align: justify;
+    &::first-letter {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 3rem;
+      line-height: 3rem;
+      margin-left: 3rem;
+      color: #4e9789;
+    }
+  }
 </style>
