@@ -54,6 +54,7 @@ export default {
     cartPrice: 'cartPrice',
   }),
   created() {
+    console.log('!@!@!');
     // this.$store.dispatch('products/getProducts');
   },
 };

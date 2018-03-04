@@ -27,8 +27,8 @@
                     <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'">
                       <i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i>
                     </a>
-                    <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a>
-                    <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
+                    <!-- <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
+                    <!-- <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
                   </div>
                 </div>
                 <h6><router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
@@ -103,8 +103,8 @@
               </div>
               <div class="option">                                                                                                                                        
                 <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'"><i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i></a>
-                <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a>
-                <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
+                <!-- <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
+                <!-- <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
               </div>
             </div>
             <h6><router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
@@ -147,8 +147,8 @@
                 </div>
                 <div class="option">
                   <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'"><i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i></a>
-                  <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a>
-                  <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
+                  <!-- <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
+                  <!-- <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
                 </div>
               </div>
               <h6><router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>

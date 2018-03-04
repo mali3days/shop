@@ -25,7 +25,7 @@
         </div>
         <div class="col-sm-4 col-md-3 cart-btn hidden-xs m-t-2">
           <a class="btn btn-theme dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <i class="fa fa-shopping-cart"></i> {{ cart.length }}
+            <i class="fa fa-shopping-cart"></i> {{ cartCount }}
             <!-- <span class="caret"></span> -->
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-cart">
@@ -79,6 +79,7 @@ export default {
   computed: mapGetters({
     cart: 'cart',
     cartPrice: 'cartPrice',
+    cartCount: 'cartCount',
     error: 'error',
   }),
   methods: {

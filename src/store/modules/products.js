@@ -42,6 +42,8 @@ const getters = {
   cart: getCartProducts,
   cartPrice: () => getCartProducts(state)
     .reduce((summ, product) => summ + (product.price.total * (product.qty || 1)), 0),
+  cartCount: () => getCartProducts(state)
+    .reduce((summ, product) => Number(summ) + Number(product.qty), 0),
   dataFetched: state => state.dataFetched,
   // eslint-disable-next-line
   getProductById: (state, id) => [
@@ -61,6 +63,9 @@ const getters = {
 // actions
 const actions = {
   /* products */
+  cartInit({ commit }) {
+    commit(types.CART_INIT);
+  },
   resetProducts({ commit }) {
     commit(types.RESET_PRODUCTS);
   },
@@ -147,9 +152,13 @@ const actions = {
 const mutations = {
 
   /* products */
+  [types.CART_INIT](state) {
+    const savedCart = localStorage.getItem('cart');
+    state.cart = JSON.parse(savedCart) || [];
+  },
   [types.RESET_PRODUCTS](state) {
+    // state.cart = [];
     state.product = null;
-    state.cart = [];
 
     state.all = [];
     state.lastAdded = [];
@@ -167,6 +176,8 @@ const mutations = {
     };
   },
   [types.RECEIVE_PRODUCTS_SUCCESS](state, { products }) {
+    matchCartWithProducts(state.cart, products);
+
     state.all = products;
     state.error = false;
     state.dataFetched = true;
@@ -180,6 +191,8 @@ const mutations = {
 
   /* One product */
   [types.RECEIVE_PRODUCT_SUCCESS](state, { product }) {
+    matchCartWithProducts(state.cart, [product]);
+
     state.product = product;
     state.error = false;
     state.dataFetched = true;
@@ -193,6 +206,8 @@ const mutations = {
   /*  */
 
   [types.RECEIVE_LAST_ADDED_PRODUCTS_SUCCESS](state, { products }) {
+    matchCartWithProducts(state.cart, products);
+
     state.lastAdded = products;
     state.error = false;
     state.dataFetched = true;
@@ -204,6 +219,8 @@ const mutations = {
     state.dataFething = false;
   },
   [types.RECEIVE_RECOMMENDED_PRODUCTS_SUCCESS](state, { products }) {
+    matchCartWithProducts(state.cart, products);
+
     state.recommended = products;
     state.error = false;
     state.dataFetched = true;
@@ -215,6 +232,8 @@ const mutations = {
     state.dataFething = false;
   },
   [types.RECEIVE_WOMAN_PRODUCTS_SUCCESS](state, res) {
+    matchCartWithProducts(state.cart, res.products);
+
     state.woman = res.products;
     state.pagination = res.pagination;
     state.error = false;
@@ -230,25 +249,44 @@ const mutations = {
   /* cart */
   [types.ADD_PRODUCT_TO_CART](state, { id }) {
     const current = getters.getProductById(state, id);
+    const duplicate = state.cart.find(cartProduct => cartProduct._id === id);
 
-    if (current) {
+    if (current && !duplicate) {
       current.qty = 1;
       current.inCart = true;
       const cart = [current, ...state.cart];
 
       toggleCartItems(current);
 
-      state.cart = [...new Set(cart)];
+      const reducedCart = cart.map((elem) => {
+        const productForCart = {
+          price: elem.price,
+          description: elem.description,
+          images: elem.images,
+          model: elem.model,
+          size: elem.size,
+          name: elem.name,
+          qty: elem.qty,
+          _id: elem._id,
+        };
+        return productForCart;
+      });
+
+      state.cart = [...new Set(reducedCart)];
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     } else {
       //eslint-disable-next-line
-      console.error('something go wrong');
+      console.error('something went wrong');
     }
   },
   [types.CHANGE_PRODUCT_QTY](state, { id, qty }) {
-    const current = getters.getProductById(state, id);
+    // const current = getters.getProductById(state, id);
+    const current = state.cart.find(cartProduct => cartProduct._id === id);
+
     if (current) {
       current.qty = qty;
-      state.all.splice(state.all.indexOf(current), 1, current);
+
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     } else {
       //eslint-disable-next-line
       console.error('something go wrong');
@@ -265,6 +303,7 @@ const mutations = {
       toggleCartItems(current);
 
       state.cart = [...new Set(cartWithoutCurrent)];
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     } else {
       //eslint-disable-next-line
       console.error('something go wrong');
@@ -290,6 +329,16 @@ function toggleCartItems(current) {
     });
     const newRecom = [...state[string], elem];
     state[string] = [...new Set(newRecom)];
+  });
+}
+
+function matchCartWithProducts(cart, products) {
+  products.forEach((prod) => {
+    state.cart.forEach((cart) => {
+      if (prod._id === cart._id) {
+        prod.inCart = true;
+      }
+    });
   });
 }
 

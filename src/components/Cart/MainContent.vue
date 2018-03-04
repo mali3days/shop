@@ -14,6 +14,7 @@
               <tr>
                 <th>Товар</th>
                 <th>Описание</th>
+                <th>Размер</th>
                 <th>Количество</th>
                 <th>Цена за шт.</th>
                 <th>Цена всего</th>
@@ -29,7 +30,15 @@
                 </td>
                 <td>
                   <p><a class="d-block">{{ product.name }}</a></p>
-                  <small>Size : {{ product.size[0] }}</small>
+                  <!-- <small>Size : {{ product.size[0] }}</small> -->
+                </td>
+                <td>
+                  <select class="selectpicker" data-width="80px">
+                    <!-- <option v-for="s in product.size" :key="s" :value="s">{{s}}</option> -->
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </select>
                 </td>
                 <td class="input-qty">
                   <input :id="product._id" type="text" :value="product.qty || 1" class="form-control text-center" />

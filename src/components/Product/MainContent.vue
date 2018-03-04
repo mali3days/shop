@@ -80,8 +80,11 @@
                 <tr>
                   <td></td>
                   <td>
+                    <!-- <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'">
+                      <i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i>
+                    </a> -->
+                    <button class="btn btn-theme m-b-1" @click="addProductToCart(product)" type="button"><i class="fa fa-shopping-cart"></i> Добавить в Корзину</button>
                     <!-- <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-heart"></i> Добавить в Список Желаний</button> -->
-                    <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-shopping-cart"></i> Добавить в Корзину</button>
                     <!-- <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-align-left"></i> Добавить к Сравнению</button> -->
                   </td>
                 </tr>
@@ -113,9 +116,12 @@
                         <span v-if="relate.labels.includes('Товар недели')" class="label-tags"><span class="label label-default arrowed">Товар недели</span></span>
                       </div>
                     <div class="option">
-                      <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a>
-                      <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a>
-                      <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
+                      <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'">
+                        <i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i>
+                      </a>
+                      <!-- <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a> -->
+                      <!-- <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
+                      <!-- <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
                     </div>
                   </div>
                   <h6><router-link :to="{ path: `/${relate.model}`, params: { productId: 123 }}">{{relate.name}}</router-link></h6>
@@ -156,7 +162,13 @@ export default {
   methods: {
     resetProducts() {
       this.$store.dispatch('products/resetProducts');
-    }
+    },
+    addProductToCart(product) {
+      //eslint-disable-next-line
+      console.log(product);
+      //eslint-disable-next-line
+      this.$store.dispatch('products/addProductToCart', { id: product._id });
+    },
   },
   data() {
     return {

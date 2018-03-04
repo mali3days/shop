@@ -190,9 +190,12 @@
                   <span v-if="product.labels && product.labels.includes('Товар недели')" class="label-tags"><span class="label label-default arrowed">Товар недели</span></span>
                 </div>
               <div class="option">
-                <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a>
-                <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a>
-                <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a>
+                <!-- <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a> -->
+                <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'">
+                  <i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i>
+                </a>
+                <!-- <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
+                <!-- <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
               </div>
             </div>
             <h6 style="height: 35px;"><router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
@@ -449,6 +452,12 @@ export default {
     };
   },
   methods: {
+    addProductToCart(product) {
+      //eslint-disable-next-line
+      console.log(product);
+      //eslint-disable-next-line
+      this.$store.dispatch('products/addProductToCart', { id: product._id });
+    },
     onFilterChange() {
       this.applyFilterButtonDisabled = false;
     },
