@@ -14,18 +14,18 @@ const getProducts = (opts) => {
 
   return axios.get(`${linkProducts}${query}`)
     .then(response => response.data)
-    .catch(error => error);
+    .catch((error) => { throw new Error(error); });
 };
 
 const getLastaddedProducts = limit =>
   axios.get(`${linkProducts}?limit=${limit}&lastadded=true`)
     .then(response => response.data)
-    .catch(error => error);
+    .catch((error) => { throw new Error(error); });
 
 const getRecommendedProducts = limit =>
   axios.get(`${linkProducts}?limit=${limit}&recommended=true`)
     .then(response => response.data)
-    .catch(error => error);
+    .catch((error) => { throw new Error(error); });
 
 const getWomanProducts = (opts) => {
   const { limit = 20, offset = 0, sort = 'purchased', order = 'desc', cat, size } = opts;
@@ -42,14 +42,14 @@ const getWomanProducts = (opts) => {
 
   return axios.get(link)
     .then(response => response.data)
-    .catch(error => error);
+    .catch((error) => { throw new Error(error); });
 };
 
 const getProductByModel = (opts) => {
   const { model } = opts;
   return axios.get(`${linkProducts}?ids[0]=${model}`)
   .then(response => response.data[0])
-  .catch(error => error);
+  .catch((error) => { throw new Error(error); });
 };
 
 export default {

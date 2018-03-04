@@ -580,6 +580,9 @@ export default {
   //     }
   //   },
   // },
+  created() {
+    this.$store.dispatch('products/resetProducts');
+  },
   mounted() {
     this.loadProducts({
       limit: this.sortBar.perPage[0],

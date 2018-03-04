@@ -1,26 +1,33 @@
 <template>
   <div>
-    <TopHeader/>
-    <MiddleHeader/>
-    <NavigationBar/>
 
-    <BreadCrumbs
-      v-if="product"
-      :model="product.model"
-      :type="product.type"
-    />
-      <!-- :gender="products[0].gender" -->
+    <div v-if="!innerFetched" class="loader-wrapper">
+      <div v-if="!innerFetched" class="cp-spinner cp-balls"></div>
+    </div>
 
-    <MainContent
-      v-if="product && similarProducts"
-      :product="product"
-      :similarProducts="similarProducts"
-      :dataFetched="dataFetched"
-    />
+    <div v-show="innerFetched" class="fade">
+      <TopHeader/>
+      <MiddleHeader/>
+      <NavigationBar/>
 
-    <FooterComponent />
-    <BackToTop/>
-    <!-- <ColorChooser/> -->
+      <BreadCrumbs
+        v-if="product"
+        :model="product.model"
+        :type="product.type"
+      />
+        <!-- :gender="products[0].gender" -->
+
+      <MainContent
+        v-if="product && similarProducts"
+        :product="product"
+        :similarProducts="similarProducts"
+        :dataFetched="dataFetched"
+      />
+
+      <FooterComponent />
+      <BackToTop/>
+      <!-- <ColorChooser/> -->
+     </div> 
   </div>
 </template>
 
@@ -55,6 +62,7 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
+      innerFetched: false,
     };
   },
   computed: mapGetters({
@@ -64,6 +72,7 @@ export default {
     error: 'error',
   }),
   created() {
+    this.$store.dispatch('products/resetProducts');
     this.loadProductByModel(this.$route.params.model);
   },
   watch: {
@@ -82,9 +91,18 @@ export default {
         },
       );
     },
+    dataFetched(data) {
+      setTimeout(() => {
+        this.innerFetched = true;
+      }, 700);
+      setTimeout(() => {
+        document.querySelector('.fade').classList.add('in');
+      }, 710);
+    }
   },
   methods: {
     loadProductByModel(model) {
+      // this.$store.dispatch('products/resetProducts');
       this.$store.dispatch(
         'products/getProductByModel',
         { model },

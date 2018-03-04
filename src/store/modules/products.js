@@ -61,6 +61,9 @@ const getters = {
 // actions
 const actions = {
   /* products */
+  resetProducts({ commit }) {
+    commit(types.RESET_PRODUCTS);
+  },
   async getProducts({ commit }, opts = null) {
     try {
       const products = await productsApi.getProducts(opts);
@@ -97,6 +100,7 @@ const actions = {
   async getWomanProducts({ commit }, opts) {
     try {
       const res = await productsApi.getWomanProducts(opts);
+      console.log(res);
       commit(
         types.RECEIVE_WOMAN_PRODUCTS_SUCCESS,
         res,
@@ -143,6 +147,25 @@ const actions = {
 const mutations = {
 
   /* products */
+  [types.RESET_PRODUCTS](state) {
+    state.product = null;
+    state.cart = [];
+
+    state.all = [];
+    state.lastAdded = [];
+    state.recommended = [];
+    state.woman = [];
+
+    state.error = false;
+    state.dataFething = false;
+    state.dataFetched = false;
+
+    state.pagination = {
+      limit: 8,
+      offset: 0,
+      total: 0,
+    };
+  },
   [types.RECEIVE_PRODUCTS_SUCCESS](state, { products }) {
     state.all = products;
     state.error = false;

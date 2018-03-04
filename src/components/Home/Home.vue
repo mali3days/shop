@@ -1,19 +1,27 @@
 <template>
   <div>
-    <TopHeader/>
-    <MiddleHeader/>
-    <NavigationBar/>
-    <FullSlider/>
-    <MainContent
-      :dataFetched="dataFetched"
-      :lastAdded="lastAdded"
-      :recommended="recommended"
-      :woman="woman"
-      :cart="cart"
-    />
-    <FooterComponent/>
-    <BackToTop/>
-    <!-- <ColorChooser/> -->
+    <div v-if="!innerFetched" class="loader-wrapper">
+      <div v-if="!innerFetched" class="cp-spinner cp-balls"></div>
+    </div>
+
+    <div v-show="innerFetched" class="fade">
+      <TopHeader/>
+      <MiddleHeader/>
+      <NavigationBar/>
+      <FullSlider/>
+
+      <MainContent
+        :dataFetched="dataFetched"
+        :lastAdded="lastAdded"
+        :recommended="recommended"
+        :woman="woman"
+        :cart="cart"
+      />
+      <FooterComponent/>
+      <BackToTop/>
+      <!-- <ColorChooser/> -->
+    </div>
+
   </div>
 </template>
 
@@ -45,7 +53,18 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
+      innerFetched: false,
     };
+  },
+  watch: {
+    dataFetched(data) {
+      setTimeout(() => {
+        this.innerFetched = true;
+      }, 700);
+      setTimeout(() => {
+        document.querySelector('.fade').classList.add('in');
+      }, 710);
+    }
   },
   computed: mapGetters({
     lastAdded: 'lastAdded',
@@ -56,6 +75,7 @@ export default {
     error: 'error',
   }),
   created() {
+    this.$store.dispatch('products/resetProducts');
     this.$store.dispatch('products/getLastaddedProducts');
     this.$store.dispatch('products/getRecommendedProducts');
     this.$store.dispatch({
@@ -66,5 +86,6 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+
 </style>

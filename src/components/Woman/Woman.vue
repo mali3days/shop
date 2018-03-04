@@ -1,10 +1,18 @@
 <template>
-  <Products
-    :products="woman"
-    :pagination="pagination"
-    :dataFetched="dataFetched"
-    :meta="meta"
-  />
+  <div>
+    <div v-if="!innerFetched" class="loader-wrapper">
+      <div v-if="!innerFetched" class="cp-spinner cp-balls"></div>
+    </div>
+    
+    <div v-show="innerFetched" class="fade">
+      <Products
+        :products="woman"
+        :pagination="pagination"
+        :dataFetched="dataFetched"
+        :meta="meta"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,6 +32,7 @@ export default {
         title: 'Женская одежда',
         link: 'products/getWomanProducts',
       },
+      innerFetched: false,
       // msg: 'Welcome to Your Vue.js App',
     };
   },
@@ -33,6 +42,16 @@ export default {
     dataFetched: 'dataFetched',
     error: 'error',
   }),
+  watch: {
+    dataFetched(data) {
+      setTimeout(() => {
+        this.innerFetched = true;
+      }, 700);
+      setTimeout(() => {
+        document.querySelector('.fade').classList.add('in');
+      }, 710);
+    }
+  },
   created() {
     // this.$store.dispatch(this.meta.link, {
     //   limit: 8,
