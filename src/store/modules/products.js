@@ -51,7 +51,7 @@ const getters = {
     ...state.all,
     ...state.woman,
     ...state.recommended,
-    state.product,
+    state.product || [],
   ].find((product) => {
     if (product._id === id) {
       console.log('FINDED');
@@ -106,7 +106,6 @@ const actions = {
   async getWomanProducts({ commit }, opts) {
     try {
       const res = await productsApi.getWomanProducts(opts);
-      console.log(res);
       commit(
         types.RECEIVE_WOMAN_PRODUCTS_SUCCESS,
         res,
@@ -119,7 +118,7 @@ const actions = {
   /* cart */
   addProductToCart({ commit }, { id }) {
     //eslint-disable-next-line
-    console.log(id);
+
     try {
       commit(types.ADD_PRODUCT_TO_CART, { id });
     } catch (error) {
@@ -275,8 +274,9 @@ const mutations = {
 
       state.cart = [...new Set(reducedCart)];
       localStorage.setItem('cart', JSON.stringify(state.cart));
-    } if (!current && !duplicate) {
-
+    } else if (!current && !duplicate) {
+      console.log('!current & !duplicate');
+      // this.cart.push();
     } else {
       //eslint-disable-next-line
       console.error('something went wrong');
@@ -301,7 +301,6 @@ const mutations = {
 
     if (current) {
       const cartWithoutCurrent = state.cart.filter(p => p._id !== current._id);
-
       delete (current.qty);
       delete (current.inCart);
 
