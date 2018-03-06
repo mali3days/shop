@@ -3,9 +3,19 @@
     <Modal :show="showModal" v-on:closeModal="closeModal" />
     <div class="row">
       <!-- Checkout Form -->
-      <div class="col-md-9">
+      <div class="col-md-12">  <!-- col-md-9 -->
         <div class="title"><span>Оформление заказа</span> <button @click="TODO_DELETE_TEST_FILL_FIELDS">TEST_FILL_FIELDS</button> </div>
-        <form>
+        <form  id="checkout" novalidate="true">
+
+
+          <p v-if="errors.length" class="error-wrapper">
+            <b v-if="errors.length === 1">Пожалуйста, исправьте следующую ошибку:</b>
+            <b v-else>Пожалуйста, исправьте следующие ошибки:</b>
+            <ul>
+              <li v-for="error in errors" :key="error">{{ error }}</li>
+            </ul>
+          </p>
+
           <div class="row">
             <div class="form-group col-sm-6">
               <label for="firstNameInput">Имя (*)</label>
@@ -51,7 +61,7 @@
                 </option>
               </select>
             </div>
-            <div class="form-group col-sm-6">
+            <!-- <div class="form-group col-sm-6">
               <label for="voucherInput">Код ваучера</label>
               <div class="input-group">
                 <input type="text" v-model="order_form.voucherCode" class="form-control" id="voucherInput" placeholder="Код ваучера">
@@ -59,7 +69,7 @@
                   <button class="btn btn-theme" type="button">Применить</button>
                 </span>
               </div>
-            </div>
+            </div> -->
             <div class="form-group col-sm-12">
               <label for="notesInput">Примечания к заказу</label>
               <textarea v-model="order_form.notes" class="form-control" rows="3" id="notesInput"></textarea>
@@ -123,7 +133,7 @@
       <!-- End Checkout Form -->
 
       <!-- New Arrivals -->
-      <div class="col-md-3 hidden-sm hidden-xs">
+      <!-- <div class="col-md-3 hidden-sm hidden-xs">
         <div class="title"><span><a href="products.html">Новинки <i class="fa fa-chevron-circle-right"></i></a></span></div>
         <div class="widget-slider owl-carousel owl-theme owl-controls-top-offset">
           <div class="box-product-outer">
@@ -137,8 +147,6 @@
                 </div>
                 <div class="option">
                   <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a>
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
                 </div>
               </div>
               <h6><a href="detail.html">WranglerGrey Printed Slim Fit Round Neck T-Shirt</a></h6>
@@ -158,8 +166,6 @@
                 </div>
                 <div class="option">
                   <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a>
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
                 </div>
               </div>
               <h6><a href="detail.html">CelioKhaki Printed Round Neck T-Shirt</a></h6>
@@ -179,8 +185,6 @@
                 </div>
                 <div class="option">
                   <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a>
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
                 </div>
               </div>
               <h6><a href="detail.html">CelioOff White Printed Round Neck T-Shirt</a></h6>
@@ -200,8 +204,6 @@
                 </div>
                 <div class="option">
                   <a href="#" data-toggle="tooltip" title="Добавить в Корзину"><i class="fa fa-shopping-cart"></i></a>
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
-                  <!-- <a href="#" data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
                 </div>
               </div>
               <h6><a href="detail.html">Levi'sNavy Blue Printed Round Neck T-Shirt</a></h6>
@@ -211,7 +213,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- End New Arrivals -->
 
     </div>
@@ -284,6 +286,8 @@ export default {
         voucherCode: '',
         notes: '',
       },
+      errors: [],
+
       showModal: false,
     };
   },
@@ -312,6 +316,12 @@ export default {
       //eslint-disable-next-line
       console.log(this.cart);
 
+      const valid = this.validateForm();
+      if (!valid) {
+        window.scrollTo(0, 200);
+        return;
+      }
+
       const products = this.cart.map(el => ({
         name: el.name,
         price: el.price,
@@ -327,8 +337,44 @@ export default {
       //eslint-disable-next-line
       console.log(order);
 
+      this.showModal = true;
       this.$store.dispatch('orders/sendOrder', { order });
       // this.clearCartAndNavigateToHome();
+    },
+    validateForm() {
+      const {
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        city,
+        post,
+        country,
+        region,
+        voucherCode,
+        notes,
+      } = this.order_form;
+      this.errors = [];
+
+      if (!firstName) this.errors.push('Имя обязательное поле');
+      if (!lastName) this.errors.push('Фамилия обязательное поле');
+      if(!email) {
+        this.errors.push('Email  обязательное поле');
+      } else if(!this.validEmail(email)) {
+        this.errors.push('Email не в правильном формате');
+      }
+      if (!phone) this.errors.push('Номер телефона обязательное поле');
+      if (!address) this.errors.push('Адресс обязательное поле');
+      if (!city) this.errors.push('Город обязательное поле');
+      if (!post) this.errors.push('Почтовый индекс обязательное поле');
+      if (!country) this.errors.push('Страна обязательное поле');
+      if (!region) this.errors.push('Область обязательное поле');
+      return this.errors.length === 0;
+    },
+    validEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
     clearCartAndNavigateToHome() {
       // this.$store.dispatch('products/clearCart');
@@ -336,10 +382,11 @@ export default {
     },
     sendOrderAndShowModal() {
       this.sendOrder();
-      this.showModal = true;
     },
   },
-  created: () => {
+  created() {
+    console.log('Created checkout');
+    console.log(this.cart);
     setTimeout(() => {
       if ($('.widget-slider').exist()) {
         const widgetSlider = $('.widget-slider');
@@ -380,5 +427,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+  .error-wrapper {
+    border: 1px solid red;
+    padding: 20px;
+    margin: 20px;
+  }
 </style>
