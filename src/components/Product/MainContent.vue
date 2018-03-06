@@ -83,7 +83,8 @@
                     <!-- <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'">
                       <i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i>
                     </a> -->
-                    <button class="btn btn-theme m-b-1" @click="addProductToCart(product)" type="button"><i class="fa fa-shopping-cart"></i> Добавить в Корзину</button>
+                    <button v-if="!product.inCart" class="btn btn-theme m-b-1" @click="addProductToCart(product)" type="button"><i class="fa fa-shopping-cart"></i> Добавить в Корзину</button>
+                    <button disabled="true" v-if="product.inCart" class="btn btn-theme m-b-1" type="button"><i class="fa fa-shopping-cart"></i> Товар уже в корзине</button>
                     <!-- <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-heart"></i> Добавить в Список Желаний</button> -->
                     <!-- <button class="btn btn-theme m-b-1" type="button"><i class="fa fa-align-left"></i> Добавить к Сравнению</button> -->
                   </td>

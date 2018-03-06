@@ -51,6 +51,7 @@ const getters = {
     ...state.all,
     ...state.woman,
     ...state.recommended,
+    state.product,
   ].find((product) => {
     if (product._id === id) {
       console.log('FINDED');
@@ -274,6 +275,8 @@ const mutations = {
 
       state.cart = [...new Set(reducedCart)];
       localStorage.setItem('cart', JSON.stringify(state.cart));
+    } if (!current && !duplicate) {
+
     } else {
       //eslint-disable-next-line
       console.error('something went wrong');
