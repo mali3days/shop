@@ -34,10 +34,7 @@
                 </td>
                 <td>
                   <select class="selectpicker" data-width="80px">
-                    <!-- <option v-for="s in product.size" :key="s" :value="s">{{s}}</option> -->
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                    <option v-for="s in product.size" :key="s" :value="s">{{s}}</option>
                   </select>
                 </td>
                 <td class="input-qty">
@@ -251,6 +248,9 @@ export default {
         }
       });
     });
+  },
+  mounted() {
+    $('select').selectpicker();
   },
 };
 </script>

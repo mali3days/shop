@@ -114,7 +114,7 @@
         <!-- Product Sorting Bar -->
         <div class="product-sorting-bar">
           <div>Сортировать по
-            <select name="sortby" @change="changeSelect()" class="selectpicker sort" v-model="sortSelected" data-width="180px">
+            <select v-model="sortSelected" name="sortby" @change="changeSelect()" class="selectpicker sort" data-width="180px">
               <option 
                 v-for="option of sortBar.sortBy"
                 :value="option.value"
@@ -390,6 +390,8 @@
 </template>
 
 <script>
+import 'bootstrap-select/js/bootstrap-select.js';
+
 export default {
   name: 'MainContent',
   props: ['meta', 'products', 'pagination', 'dataFetched'],
@@ -599,6 +601,8 @@ export default {
       sort: JSON.parse(this.sortBar.sortBy[0].value).title,
       order: JSON.parse(this.sortBar.sortBy[0].value).order,
     });
+
+    $('select').selectpicker();
 
     // setTimeout(() => {
 
