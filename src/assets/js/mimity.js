@@ -105,18 +105,18 @@ function get_current_scroll() {
       $(this).parent().toggleClass('open');
     });
 
-    // owlCarousel for Home Slider =============================================================
-    if ($('.home-slider').exist()) {
-      $('.home-slider').owlCarousel({
-        items:1,
-        loop:true,
-        autoplay:true,
-        autoplayHoverPause:true,
-        dots:false,
-        nav:true,
-        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-      });
-    }
+    // // owlCarousel for Home Slider =============================================================
+    // if ($('.home-slider').exist()) {
+    //   $('.home-slider').owlCarousel({
+    //     items:1,
+    //     loop:true,
+    //     autoplay:true,
+    //     autoplayHoverPause:true,
+    //     dots:false,
+    //     nav:true,
+    //     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    //   });
+    // }
 
     // owlCarousel for Widget Slider ===========================================================
     // if ($('.widget-slider').exist()) {
