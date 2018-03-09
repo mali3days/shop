@@ -157,6 +157,13 @@ const actions = {
       commit(types.CART_FAILURE, { error });
     }
   },
+  changeProductSize({ commit }, { id, size }) {
+    try {
+      commit(types.CHANGE_PRODUCT_SIZE, { id, size });
+    } catch (error) {
+      commit(types.CART_FAILURE, { error });
+    }
+  },
   removeProductFromCart({ commit }, { id }) {
     try {
       commit(types.REMOVE_PRODUCT_FROM_CART, { id });
@@ -314,6 +321,19 @@ const mutations = {
 
     if (current) {
       current.qty = qty;
+
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+    } else {
+      //eslint-disable-next-line
+      console.error('something go wrong');
+    }
+  },
+  [types.CHANGE_PRODUCT_SIZE](state, { id, size }) {
+    // const current = getters.getProductById(state, id);
+    const current = state.cart.find(cartProduct => cartProduct._id === id);
+
+    if (current) {
+      current.activeSize = size;
 
       localStorage.setItem('cart', JSON.stringify(state.cart));
     } else {

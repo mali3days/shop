@@ -26,6 +26,7 @@ export const CHANGE_PRODUCT            = 'CHANGE_PRODUCT';
 /* cart */
 export const ADD_PRODUCT_TO_CART       = 'ADD_PRODUCT_TO_CART';
 export const CHANGE_PRODUCT_QTY        = 'CHANGE_PRODUCT_QTY';
+export const CHANGE_PRODUCT_SIZE       = 'CHANGE_PRODUCT_SIZE';
 export const REMOVE_PRODUCT_FROM_CART  = 'REMOVE_PRODUCT_FROM_CART';
 export const CLEAR_CART                = 'CLEAR_CART';
 export const CART_FAILURE              = 'CART_FAILURE';

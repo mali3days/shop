@@ -97,7 +97,7 @@
                 </td>
                 <td>
                   <p><a class="d-block">{{ product.name }}</a></p>
-                  <small>Size : {{ product.size[0] }}</small>
+                  <small>Size : {{ product.activeSize || product.size[0] }}</small>
                 </td>
                 <td class="input-qty text-center">
                   <span>{{ product.qty || 1 }}</span>

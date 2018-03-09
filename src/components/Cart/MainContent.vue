@@ -33,8 +33,15 @@
                   <!-- <small>Size : {{ product.size[0] }}</small> -->
                 </td>
                 <td>
-                  <select class="selectpicker" data-width="80px">
-                    <option v-for="s in product.size" :key="s" :value="s">{{s}}</option>
+                  <select class="selectpicker" @change="changeActiveSize($event, product)" data-width="80px">
+                    <option 
+                      v-for="s in product.size"
+                      :selected="product.activeSize === s"
+                      :key="s" 
+                      :value="s"
+                    >
+                      {{s}}
+                    </option>
                   </select>
                 </td>
                 <td class="input-qty">
@@ -192,6 +199,9 @@ export default {
       $('.tooltip').tooltip('destroy');
       // eslint-disable-next-line
       this.$store.dispatch('products/removeProductFromCart', { id: product._id });
+    },
+    changeActiveSize(e, product) {
+       this.$store.dispatch('products/changeProductSize', { id: product._id, size: e.target.value });
     },
   },
   created() {
