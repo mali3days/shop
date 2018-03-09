@@ -8,7 +8,7 @@
       </div>
       <div class="col-md-12" v-if="cart.length > 0">
         <div class="title"><span>Моя корзина</span></div>
-        <div class="table-responsive">
+        <div class="table-responsive of-visible">
           <table class="table table-bordered table-cart">
             <thead>
               <tr>

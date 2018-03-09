@@ -89,5 +89,8 @@ export default {
     transform: translate(5px, 5px);
   }
 }
+.of-visible {
+  overflow: visible;
+}
 </style>
 
