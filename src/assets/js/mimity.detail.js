@@ -3,20 +3,20 @@
 
   $(function(){
     // owlcarosel (if items less than 4, hide nav, disable drag, hide touch)
-    var products_slider_detail = $('.products-slider-detail');
-    var item_count = $('.products-slider-detail a').length;
-    products_slider_detail.owlCarousel({
+    var productsSliderDetail = $('.products-slider-detail');
+    var itemCount = $('.products-slider-detail a').length;
+    productsSliderDetail.owlCarousel({
       margin:5,
       dots:false,
-      nav:item_count < 5 ? false : true,
-      mouseDrag:item_count < 5 ? false : true,
-      touchDrag:item_count < 5 ? false : true,
+      nav:itemCount < 5 ? false : true,
+      mouseDrag:itemCount < 5 ? false : true,
+      touchDrag:itemCount < 5 ? false : true,
       navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
       responsive: {
           0: { items:4, }
       }
     });
-    $('.products-slider-detail a').click(function(){
+    $('.products-slider-detail a').click(function anonimus(){
       var src = $(this).find('img').attr('src');
       var zoom = $(this).find('img').attr('data-zoom-image');
       var detail = $(this).parent().parent().parent().parent().parent().find('.image-detail img');

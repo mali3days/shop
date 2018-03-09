@@ -390,7 +390,7 @@
 </template>
 
 <script>
-import 'bootstrap-select/js/bootstrap-select.js';
+import 'bootstrap-select/js/bootstrap-select';
 
 export default {
   name: 'MainContent',

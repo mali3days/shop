@@ -39,6 +39,6 @@ module.exports = {
     /* my rules */
     'no-param-reassign': 0,
     'no-shadow': 0,
-    'no-underscore-dangle': 1,
+    'no-underscore-dangle': 0,
   }
 }

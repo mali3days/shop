@@ -352,16 +352,16 @@ export default {
         post,
         country,
         region,
-        voucherCode,
-        notes,
+        // voucherCode,
+        // notes,
       } = this.order_form;
       this.errors = [];
 
       if (!firstName) this.errors.push('Имя обязательное поле');
       if (!lastName) this.errors.push('Фамилия обязательное поле');
-      if(!email) {
+      if (!email) {
         this.errors.push('Email  обязательное поле');
-      } else if(!this.validEmail(email)) {
+      } else if (!this.validEmail(email)) {
         this.errors.push('Email не в правильном формате');
       }
       if (!phone) this.errors.push('Номер телефона обязательное поле');
@@ -373,6 +373,7 @@ export default {
       return this.errors.length === 0;
     },
     validEmail(email) {
+      //eslint-disable-next-line
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
@@ -385,7 +386,9 @@ export default {
     },
   },
   created() {
+    //eslint-disable-next-line
     console.log('Created checkout');
+    //eslint-disable-next-line
     console.log(this.cart);
     setTimeout(() => {
       if ($('.widget-slider').exist()) {

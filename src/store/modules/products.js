@@ -23,9 +23,36 @@ const state = {
   },
 };
 
+
 const getCartProducts = state => state.cart;
 
 const allData = ['all', 'lastAdded', 'recommended', 'woman'];
+
+function toggleCartItems(current) {
+  allData.forEach((string) => {
+    if (state[string].length === 0) return;
+    const elem = state[string].find((c) => {
+      if (c && current) {
+        if (c._id === current._id) {
+          return current;
+        }
+      }
+      return null;
+    });
+    const newRecom = [...state[string], elem];
+    state[string] = [...new Set(newRecom)];
+  });
+}
+
+function matchCartWithProducts(cart, products) {
+  products.forEach((prod) => {
+    state.cart.forEach((cart) => {
+      if (prod._id === cart._id) {
+        prod.inCart = true;
+      }
+    });
+  });
+}
 
 // getters
 const getters = {
@@ -54,6 +81,7 @@ const getters = {
     state.product || [],
   ].find((product) => {
     if (product._id === id) {
+      //eslint-disable-next-line
       console.log('FINDED');
       return product;
     }
@@ -275,6 +303,7 @@ const mutations = {
       state.cart = [...new Set(reducedCart)];
       localStorage.setItem('cart', JSON.stringify(state.cart));
     } else if (!current && !duplicate) {
+      //eslint-disable-next-line
       console.log('!current & !duplicate');
       // this.cart.push();
     } else {
@@ -323,31 +352,6 @@ const mutations = {
     state.error = error;
   },
 };
-
-function toggleCartItems(current) {
-  allData.forEach((string) => {
-    if (state[string].length === 0) return;
-    const elem = state[string].find((c) => {
-      if (c && current) {
-        c._id === current._id;
-        return current;
-      }
-      return null;
-    });
-    const newRecom = [...state[string], elem];
-    state[string] = [...new Set(newRecom)];
-  });
-}
-
-function matchCartWithProducts(cart, products) {
-  products.forEach((prod) => {
-    state.cart.forEach((cart) => {
-      if (prod._id === cart._id) {
-        prod.inCart = true;
-      }
-    });
-  });
-}
 
 export default {
   state,

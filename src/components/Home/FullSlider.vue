@@ -23,13 +23,13 @@ export default {
     // // owlCarousel for Home Slider =============================================================
     if ($('.home-slider').exist()) {
       $('.home-slider').owlCarousel({
-        items:1,
-        loop:true,
-        autoplay:true,
-        lazyLoad:true,
-        autoplayHoverPause:true,
-        dots:false,
-        nav:true,
+        items: 1,
+        loop: true,
+        autoplay: true,
+        lazyLoad: true,
+        autoplayHoverPause: true,
+        dots: false,
+        nav: true,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
       });
     }

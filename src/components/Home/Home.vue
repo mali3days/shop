@@ -57,14 +57,14 @@ export default {
     };
   },
   watch: {
-    dataFetched(data) {
+    dataFetched() {
       setTimeout(() => {
         this.innerFetched = true;
       }, 700);
       setTimeout(() => {
         document.querySelector('.fade').classList.add('in');
       }, 710);
-    }
+    },
   },
   computed: mapGetters({
     lastAdded: 'lastAdded',
