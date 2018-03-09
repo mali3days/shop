@@ -33,9 +33,7 @@ function toggleCartItems(current) {
     if (state[string].length === 0) return;
     const elem = state[string].find((c) => {
       if (c && current) {
-        if (c._id === current._id) {
-          return current;
-        }
+        return current;
       }
       return null;
     });
@@ -146,7 +144,6 @@ const actions = {
   /* cart */
   addProductToCart({ commit }, { id }) {
     //eslint-disable-next-line
-
     try {
       commit(types.ADD_PRODUCT_TO_CART, { id });
     } catch (error) {
@@ -326,7 +323,7 @@ const mutations = {
   },
   [types.REMOVE_PRODUCT_FROM_CART](state, { id }) {
     const current = getters.getProductById(state, id);
-    const productInCart = state.cart.filter(p => p._id === id);
+    const productInCart = state.cart.find(p => p._id === id);
 
     if (current) {
       const cartWithoutCurrent = state.cart.filter(p => p._id !== current._id);
@@ -340,6 +337,7 @@ const mutations = {
     } else if (productInCart) {
       const cartIndex = state.cart.findIndex(product => product.a === id);
       state.cart.splice(cartIndex, 1);
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     } else {
       //eslint-disable-next-line
       console.error('something go wrong');
