@@ -5,10 +5,6 @@ node_js:
 before_script:
 - npm install
 
-cache:
-  directories:
-  - node_modules
-
 # Tell Travis CI to monitor only these branches
 branches:
   only:
@@ -19,7 +15,7 @@ script: npm run build
 
 deploy:
   provider: pages
-  skip-cleanup: true
+  skip-cleanup: false
   github-token: $GITHUB_TOKEN
   keep-history: true
   local-dir: docs
