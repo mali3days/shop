@@ -201,7 +201,7 @@ export default {
       this.$store.dispatch('products/removeProductFromCart', { id: product._id });
     },
     changeActiveSize(e, product) {
-       this.$store.dispatch('products/changeProductSize', { id: product._id, size: e.target.value });
+      this.$store.dispatch('products/changeProductSize', { id: product._id, size: e.target.value });
     },
   },
   created() {
