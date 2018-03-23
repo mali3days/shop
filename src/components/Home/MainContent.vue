@@ -3,9 +3,14 @@
     <div class="row">
       <!-- New Arrivals & Best Selling -->
       <div class="col-md-3 m-b-1">
-        <div class="title"><span><a href="products.html">
-          Новинки <i class="fa fa-chevron-circle-right"></i></a></span>
+        <div class="title">
+          <span>
+            <router-link :to="{ path: '/'}">
+              Новинки <i class="fa fa-chevron-circle-right"></i>
+            </router-link>
+          </span>
         </div>
+
         <div class="widget-slider owl-carousel owl-theme owl-controls-top-offset m-b-2">
           <div v-for="product in lastAdded" :key="product._id">
             <div class="box-product-outer">
@@ -101,7 +106,7 @@
                 <span v-if="product.labels.includes('Популярное')" class="label-tags"><span class="label label-primary arrowed">Популярное</span></span>
                 <span v-if="product.labels.includes('Товар недели')" class="label-tags"><span class="label label-default arrowed">Товар недели</span></span>
               </div>
-              <div class="option">                                                                                                                                        
+              <div class="option">
                 <a data-toggle="tooltip" @click="addProductToCart(product)" :data-original-title="!product.inCart ? 'Добавить в Корзину' : 'Уже в Корзине'"><i class="fa fa-shopping-cart" v-bind:class="{ alreadyInCart: product.inCart }"></i></a>
                 <!-- <a data-toggle="tooltip" title="Добавить к Сравнению"><i class="fa fa-align-left"></i></a> -->
                 <!-- <a data-toggle="tooltip" title="Добавить в Список Желаний" class="wishlist"><i class="fa fa-heart"></i></a> -->
@@ -109,7 +114,7 @@
             </div>
             <h6><router-link :to="{ path: `/product/${product.model}`, params: { productId: 123 }}">{{product.name}}</router-link></h6>
               <div class="price">
-                <div>{{product.price.discount > 0 ? product.price.total : product.price.current}}грн. 
+                <div>{{product.price.discount > 0 ? product.price.total : product.price.current}}грн.
                   <span class="label-tags">
                     <span class="label label-danger arrowed">
                       <span v-if="product.price.discount > 0">-{{product.price.discount}}%</span>

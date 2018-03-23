@@ -2,7 +2,7 @@
   <div class="breadcrumb-container">
     <div class="container">
       <ol class="breadcrumb">
-        <li><a href="index.html">Главная</a></li>
+        <li><router-link to='/'>Главная</router-link><li>
         <li class="active">{{ gender || 'gender' }}</li>
         <!-- <li class="active">{{ type || 'type' }}</li> -->
         <!-- <li class="active">{{ model || 'model' }}</li> -->

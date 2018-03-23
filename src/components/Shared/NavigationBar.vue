@@ -8,9 +8,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="cart.html" class="btn btn-default btn-cart-xs visible-xs pull-right">
+          <router-link to="/cart" class="btn btn-default btn-cart-xs visible-xs pull-right">
             <i class="fa fa-shopping-cart"></i> Корзина
-          </a>
+          </router-link>
+
           <!-- <a href="wishlist.html" class="btn btn-default btn-cart-xs visible-xs pull-right">
             <i class="fa fa-heart"></i> Wishlist : 3
           </a> -->

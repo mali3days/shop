@@ -71,7 +71,7 @@
           <img src="../../assets/images/payment-5.png" alt="Payment-5">
         </div>
         <div class="col-md-3 col-sm-6">
-          <div class="title-footer"><span>Мой аккаунт</span></div>
+          <div class="title-footer"><span>Мой аккаунт (его нет)</span></div>
           <ul>
             <li><i class="fa fa-angle-double-right"></i> <a>Заказы</a></li>
             <li><i class="fa fa-angle-double-right"></i> <a>Ваучеры(?)</a></li>

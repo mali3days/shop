@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 logo">
-          <a href="index.html"><img alt="Logo" src="../../assets/images/logo-teal.png" class="img-responsive" data-text-logo="Bubbles shop" /></a>
+          <router-link to='/'>
+            <img alt="Logo" src="../../assets/images/logo-teal.png" class="img-responsive" data-text-logo="Bubbles shop" />
+          </router-link>
         </div>
         <div style="visibility: hidden;" class="col-sm-8 col-md-6 search-box m-t-2">
           <div class="input-group">
@@ -31,10 +33,18 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-cart">
             <div class="media" v-for="(cartProduct, i) in cart" :key="i">
               <div class="media-left">
-                <a href="detail.html"><img class="media-object img-thumbnail" :src="cartProduct.images[0]" width="50" alt="product"></a>
+
+                <router-link :to="{ path: `/product/${cartProduct.model}`}">
+                   <img class="media-object img-thumbnail" :src="cartProduct.images[0]" width="50" alt="product">
+                </router-link>
+
               </div>
               <div class="media-body">
-                <a href="detail.html" class="media-heading">{{ cartProduct.name }}</a>
+
+                <router-link class="media-heading" :to="{ path: `/product/${cartProduct.model}`}">
+                   {{ cartProduct.name }}
+                </router-link>
+
                 <div>{{ cartProduct.qty || 1 }}шт х {{ cartProduct.price.total }}грн.</div>
               </div>
               <div class="media-right">

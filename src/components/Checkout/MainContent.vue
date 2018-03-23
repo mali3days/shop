@@ -119,11 +119,15 @@
                 <td colspan="2"><b>${{ cartPrice }}</b></td>
               </tr>
             </tbody>
-          </table>        
+          </table>
           </div>
           <nav aria-label="Checkout Next Navigation">
             <ul class="pager">
-              <li class="previous"><a href="cart.html"><span aria-hidden="true">&larr;</span> Вернуться в Корзину</a></li>
+               <li class="previous">
+                  <router-link :to="{ path: '/cart'}">
+                    <span aria-hidden="true">&larr;</span> Вернуться в Корзину
+                  </router-link>
+               </li>
               <li @click="sendOrderAndShowModal()" class="next"><a>Оформить заказ <span aria-hidden="true">&rarr;</span></a></li>
             </ul>
           </nav>
