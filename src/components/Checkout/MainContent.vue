@@ -4,7 +4,8 @@
     <div class="row">
       <!-- Checkout Form -->
       <div class="col-md-12">  <!-- col-md-9 -->
-        <div class="title"><span>Оформление заказа</span> <button @click="TODO_DELETE_TEST_FILL_FIELDS">TEST_FILL_FIELDS</button> </div>
+        <div class="title"><span>Оформление заказа</span></div>
+        <!-- <button @click="TODO_DELETE_TEST_FILL_FIELDS">TEST_FILL_FIELDS</button> -->
         <form  id="checkout" novalidate="true">
 
 
@@ -42,7 +43,7 @@
               <input type="text" v-model="order_form.city" class="form-control" id="cityInput" placeholder="Город">
             </div>
             <div class="form-group col-sm-6">
-              <label for="postInput">Почтовый индекс (*)</label>
+              <label for="postInput">Почтовый индекс (*) + номер отделения "Новая Почта" (*)</label>
               <input type="text" v-model="order_form.post" class="form-control" id="postInput" placeholder="Почтовый индекс">
             </div>
             <div class="form-group col-sm-6">
