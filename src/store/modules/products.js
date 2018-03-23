@@ -299,6 +299,7 @@ const mutations = {
           size: elem.size,
           name: elem.name,
           qty: elem.qty,
+          textile: elem.textile,
           _id: elem._id,
         };
         return productForCart;
