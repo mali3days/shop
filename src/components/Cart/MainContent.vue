@@ -34,10 +34,10 @@
                 </td>
                 <td>
                   <select class="selectpicker" @change="changeActiveSize($event, product)" data-width="80px">
-                    <option 
+                    <option
                       v-for="s in product.size"
                       :selected="product.activeSize === s"
-                      :key="s" 
+                      :key="s"
                       :value="s"
                     >
                       {{s}}
@@ -69,14 +69,22 @@
         </div>
         <nav aria-label="Shopping Cart Next Navigation">
           <ul class="pager">
-            <li class="previous"><a href="products.html"><span aria-hidden="true">&larr;</span> Продолжить покупки</a></li>
+            <li class="previous">
+              <router-link :to="{ path: '/'}">
+                <span aria-hidden="true">&larr;</span>Продолжить покупки
+              </router-link>
+            </li>
             <li class="next"><router-link :to="{ path: '/checkout'}">Оформление заказа<span aria-hidden="true">&rarr;</span></router-link></li>
           </ul>
         </nav>
       </div>
       <nav aria-label="Shopping Cart Next Navigation" v-if="cart.length === 0">
         <ul class="pager">
-          <li class="previous"><a href="products.html"><span aria-hidden="true">&larr;</span> Продолжить покупки</a></li>
+          <li class="previous">
+            <router-link :to="{ path: '/'}">
+              <span aria-hidden="true">&larr;</span>Продолжить покупки
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- End Shopping Cart List -->
