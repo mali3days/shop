@@ -12,12 +12,10 @@ import Product from '@/components/Product/Product';
 import Cart from '@/components/Cart/Cart';
 import Checkout from '@/components/Checkout/Checkout';
 import Register from '@/components/Register/Register';
+import Faq from '@/components/Faq/Faq';
 // import LordOfTheBubbles from '@/components/LordOfTheBubbles/LordOfTheBubbles';
 
 import HelloWorld from '@/components/HelloWorld';
-
-// Admin
-// Containers
 
 Vue.use(Router);
 
@@ -60,6 +58,11 @@ export default new Router({
       path: '/helloworld',
       name: 'HelloWorld',
       component: HelloWorld,
+    },
+    {
+      path: '/Faq',
+      name: 'Faq',
+      component: Faq,
     },
     // {
     //   path: '/products',

@@ -8,7 +8,12 @@
             <!-- <li><a href="#"><i class="fa fa-android"></i> Download App</a></li> -->
           </ul>
           <ul class="list-inline pull-right">
-            <li class="hidden-xs"><a href="faq.html"><i class="fa fa-question-circle"></i> Помощь</a></li>
+            <li class="hidden-xs">
+              <router-link class="hidden-xs" to='Faq'>
+                <i class="fa fa-question-circle"></i>Помощь
+              </router-link>
+            </li>
+
             <li class="hidden-xs"><a href="#"><i class="fa fa-phone"></i> +123-456-789</a></li>
             <!-- <li>
               <select class="selectpicker" data-width="95px" data-style="btn-default">
