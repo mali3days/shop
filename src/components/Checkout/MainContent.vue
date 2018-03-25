@@ -13,7 +13,7 @@
             <b v-if="errors.length === 1">Пожалуйста, исправьте следующую ошибку:</b>
             <b v-else>Пожалуйста, исправьте следующие ошибки:</b>
             <ul>
-              <li v-for="error in errors" :key="error">{{ error }}</li>
+              <li v-for="error of errors" :key="error">{{ error }}</li>
             </ul>
           </p>
 
@@ -50,14 +50,14 @@
               <label for="countryInput">Страна (*)</label>
               <select class="form-control selectpicker" id="countryInput" data-live-search="true" data-dropup-auto="false">
                 <!-- <option value=""> --- Сделайте выбор --- </option> -->
-                <option :value="order_form.country.id" selected="false">{{ order_form.country.name }}</option>
+                <option :value="order_form.country" :selected="order_form.country">{{ order_form.country }}</option>
                 </select>
             </div>
             <div class="form-group col-sm-6">
               <label for="regionInput">Область (*)</label>
-              <select v-model="order_form.region.id" class="form-control selectpicker" id="regionInput" data-live-search="true" data-dropup-auto="false">
+              <select v-model="order_form.region" class="form-control selectpicker" id="regionInput" data-live-search="true" data-dropup-auto="false">
                 <option value=""> --- Сделайте выбор --- </option>
-                <option v-for="region in UA_REGIONS" :key="region.id" :value="region.id" :selected="region.id == order_form.egion">
+                <option v-for="region of UA_REGIONS" :key="region.id" :value="region.name" :selected="region.id == order_form.region">
                   {{ region.name }}
                 </option>
               </select>
@@ -90,7 +90,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(product, index) in cart" :key="index">
+              <tr v-for="(product, index) of cart" :key="index">
                 <td class="img-cart">
                   <a>
                     <img alt="Product" :src="product.images[0]" class="img-thumbnail">
@@ -227,6 +227,7 @@
 
 <script>
 // import { createNamespacedHelpers } from 'vuex';
+import 'bootstrap-select/js/bootstrap-select';
 import Modal from '../Modal/Modal';
 
 import imageLarge1 from '../../assets/images/demo/p1-large-1.jpg';
@@ -286,7 +287,7 @@ export default {
         address: '',
         city: '',
         post: '',
-        country: { id: 'UA', name: 'Украина' },
+        country: 'Украина',
         region: '',
         voucherCode: '',
         notes: '',
@@ -332,7 +333,7 @@ export default {
         price: el.price,
         model: el.model,
         qty: el.qty,
-        size: el.size,
+        size: el.activeSize,
         textile: el.textile,
         images: el.images[0] || null,
       }));
@@ -389,6 +390,9 @@ export default {
     sendOrderAndShowModal() {
       this.sendOrder();
     },
+  },
+  mounted() {
+    $('select').selectpicker();
   },
   created() {
     //eslint-disable-next-line

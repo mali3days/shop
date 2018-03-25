@@ -286,6 +286,7 @@ const mutations = {
     if (current && !duplicate) {
       current.qty = 1;
       current.inCart = true;
+      current.activeSize = current.size[0];
       const cart = [current, ...state.cart];
 
       toggleCartItems(current);
@@ -299,6 +300,7 @@ const mutations = {
           size: elem.size,
           name: elem.name,
           qty: elem.qty,
+          activeSize: elem.activeSize,
           textile: elem.textile,
           _id: elem._id,
         };
