@@ -1,27 +1,27 @@
-language: node_js
-node_js:
-  - '8.9.1'
+# language: node_js
+# node_js:
+#   - '8.9.1'
 
-before_script:
-- npm install
+# before_script:
+# - npm install
 
-# Tell Travis CI to monitor only these branches
-branches:
-  only:
-  - master
-  - dev
+# # Tell Travis CI to monitor only these branches
+# branches:
+#   only:
+#   - master
+#   - dev
 
-script: npm run build
+# script: npm run build
 
-deploy:
-  edge:
-    branch: v1.8.47
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: docs
-  on:
-    branch: master
+# deploy:
+#   edge:
+#     branch: v1.8.47
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: $GITHUB_TOKEN
+#   keep-history: true
+#   local-dir: docs
+#   on:
+#     branch: master
 
     
