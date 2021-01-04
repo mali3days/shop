@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "bootstrap-select": "^1.12.4",
     "owl.carousel": "^2.2.0",
     "query-string": "^5.1.0",
